@@ -15,9 +15,9 @@ const useStyle = makeStyles({
         background: 'white',
         color: '#2874F0',
         textTransform: 'none',
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: 600,
-        padding: '6px 35px'
+        padding: '5px 35px'
     },
     cartBox:{
         display: 'flex'
