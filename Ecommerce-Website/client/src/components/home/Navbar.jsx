@@ -31,7 +31,7 @@ const Navbar = () => {
             {
                 navBarData.map((item)=>(
                     <Box className={classes.navbarItemBox}>
-                        <img src={item.url} className={classes.navbarImage}/>
+                        <img src={item.url} className={classes.navbarImage} alt={item.text}/>
                         <Typography className={classes.navbarText}>{item.text}</Typography>
                     </Box>
                 ))
