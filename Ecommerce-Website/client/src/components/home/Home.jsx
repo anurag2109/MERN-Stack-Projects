@@ -4,22 +4,44 @@ import { Box, makeStyles } from '@material-ui/core';
 // components
 import Navbar from './Navbar';
 import Banner from './Banner';
-
+import Slides from './Slides';
 
 
 const useStyle = makeStyles({
-    banner:{
-        padding: 10
+    homeComponentsBox:{
+        padding: 10,
+        background: '#f2f2f2'
+    },
+    sliderAndAddBox:{
+        display: 'flex'
+    },
+    firstSlider:{
+        width: '83%'
+    },
+    addImgBox:{
+        background: '#ffffff',
+        padding: 5,
+        margin: '12px 0 0 10px',
+        width: '17%'
     }
 })
 const Home = () => {
     const classes = useStyle();
-
+    const advertisementUrl  = 'https://rukminim1.flixcart.com/flap/464/708/image/633789f7def60050.jpg?q=70';
     return (
         <div>
             <Navbar/>
-            <Box className={classes.banner}>
+            <Box className={classes.homeComponentsBox}>
                 <Banner/>
+                <Box className={classes.sliderAndAddBox}>
+                    <Box className={classes.firstSlider}>
+                        <Slides title="Deals of the Day" timer={true}/>
+                    </Box>
+                    <Box className={classes.addImgBox}>
+                        <img src={advertisementUrl} alt="advertisement" style={{width: 230}} />
+                    </Box>
+                </Box>
+                <Slides title="Trending Offers" timer={false}/>
             </Box>
         </div>
     )
