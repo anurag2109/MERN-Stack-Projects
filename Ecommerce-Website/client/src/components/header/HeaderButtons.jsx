@@ -2,6 +2,12 @@ import React from 'react'
 import { Box, Button, Badge, makeStyles, Typography } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons'
 
+
+// components
+import LoginDialog from '../login/Login';
+import { useState } from 'react';
+
+
 const useStyle = makeStyles({
     headerBtnContainer:{
         display: 'flex',
@@ -25,10 +31,15 @@ const useStyle = makeStyles({
 })
 const HeaderButtons = () => {
     const classes = useStyle();
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () =>{
+        setOpen(true);
+    };
 
     return (
         <Box className={classes.headerBtnContainer}>
-            <Button variant='contained' className={classes.loginBtn}>Login</Button>
+            <Button variant='contained' onClick={handleClickOpen} className={classes.loginBtn}>Login</Button>
             <Typography>More</Typography>
             <Box className={classes.cartBox}>
                 <Badge badgeContent={2} color='secondary'>
@@ -36,6 +47,7 @@ const HeaderButtons = () => {
                 </Badge>
                 <Typography style={{marginLeft: 5}}>Cart</Typography>
             </Box>
+            <LoginDialog open = {open} setOpen={setOpen} />
         </Box>
     )
 }
