@@ -1,11 +1,14 @@
 import React from 'react'
-import { Box, Button, Badge, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Badge, makeStyles, Typography, Link } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons'
 
 
 // components
 import LoginDialog from '../login/Login';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { LoginContext } from '../../context/ContextProvider';
+import Profile from './Profile';
 
 
 const useStyle = makeStyles({
@@ -14,7 +17,10 @@ const useStyle = makeStyles({
         alignItems: 'center',
         margin: '0 7% 0 auto',
         '& > *':{
-            marginRight: 50
+            marginRight: 50,
+            alignItems: 'center',
+            textDecoration: 'none',
+            color: '#FFFFFF',
         }
     },
     loginBtn:{
@@ -32,6 +38,7 @@ const useStyle = makeStyles({
 const HeaderButtons = () => {
     const classes = useStyle();
     const [open, setOpen] = useState(false);
+    const { account, setAccount } = useContext(LoginContext);
 
     const handleClickOpen = () =>{
         setOpen(true);
@@ -39,7 +46,12 @@ const HeaderButtons = () => {
 
     return (
         <Box className={classes.headerBtnContainer}>
-            <Button variant='contained' onClick={handleClickOpen} className={classes.loginBtn}>Login</Button>
+            {
+                account ? <Profile account={account} setAccount={setAccount}  /> :
+                <Link to='/'>
+                    <Button variant='contained' onClick={handleClickOpen} className={classes.loginBtn}>Login</Button>
+                </Link>
+            }
             <Typography>More</Typography>
             <Box className={classes.cartBox}>
                 <Badge badgeContent={2} color='secondary'>
@@ -47,7 +59,7 @@ const HeaderButtons = () => {
                 </Badge>
                 <Typography style={{marginLeft: 5}}>Cart</Typography>
             </Box>
-            <LoginDialog open = {open} setOpen={setOpen} />
+            <LoginDialog open = {open} setOpen={setOpen} setAccount={setAccount} />
         </Box>
     )
 }

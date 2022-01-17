@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogContent, makeStyles, TextField, Typography } from '@material-ui/core';
-
+import { authenticateSignup } from '../../service/api';
 
 const useStyle = makeStyles({
     dialogContent:{
@@ -72,10 +72,21 @@ const initialValue = {
     }
 }
 
-const Login = ({open , setOpen}) => {
+const signupInitialValues = {
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    password: '',
+    phone: ''
+}
+
+const Login = ({open , setOpen, setAccount}) => {
     const classes = useStyle();
+
     const [account, setToggleAccount ] = useState(initialValue.login);
-    
+    const [signup, setSignup] = useState(signupInitialValues);
+
     const handleClose = () =>{
         setOpen(false);
         setToggleAccount(initialValue.login);
@@ -83,6 +94,17 @@ const Login = ({open , setOpen}) => {
 
     const toggleAccount = () =>{
         setToggleAccount(initialValue.signup);
+    }
+
+    const onInputChange = (e) =>{
+        setSignup({...signup, [e.target.name]: e.target.value })
+    }
+
+    const signupuser = async () =>{
+        let responce = await authenticateSignup(signup);
+        if(responce) return;
+        handleClose();
+        setAccount(signup.username);        
     }
 
     return (
@@ -100,24 +122,24 @@ const Login = ({open , setOpen}) => {
                     {
                         account.view === 'login' ?
                         <Box className={classes.login}>
-                        <TextField name = 'username' label='Enter Email/Mobile number' />
-                        <TextField name='password' label='Enter Password' />
-                        <Typography className={classes.text}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Typography>
-                        <Button variant='contained' className={classes.loginBtn} >Login</Button>
-                        <Typography className={classes.text} style={{textAlign: 'center'}}>OR</Typography>
-                        <Button variant='contained' className={classes.requestBtn}>Request OTP</Button>
-                        <Typography onClick={() =>toggleAccount()}  className={classes.createText}>New to Flipkart? Create an account</Typography>
-                    </Box> :
-                    
-                    <Box className={classes.login}>
-                        <TextField name = 'firstname' label='Enter FirstName' />
-                        <TextField name='lastname' label='Enter LastName' />
-                        <TextField name = 'username' label='Enter Username' />
-                        <TextField name='email' label='Enter Email' />
-                        <TextField name = 'password' label='Enter Password' />
-                        <TextField name='phone' label='Enter Phone' />
-                        <Button variant='contained' className={classes.loginBtn}>SignUp</Button>
-                    </Box>
+                            <TextField name = 'username' label='Enter Email/Mobile number' />
+                            <TextField name='password' label='Enter Password' />
+                            <Typography className={classes.text}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Typography>
+                            <Button variant='contained' className={classes.loginBtn} >Login</Button>
+                            <Typography className={classes.text} style={{textAlign: 'center'}}>OR</Typography>
+                            <Button variant='contained' className={classes.requestBtn}>Request OTP</Button>
+                            <Typography onClick={() =>toggleAccount()}  className={classes.createText}>New to Flipkart? Create an account</Typography>
+                        </Box> :
+                        
+                        <Box className={classes.login}>
+                            <TextField onChange={(e)=>{onInputChange(e)}} name = 'firstname' label='Enter FirstName' />
+                            <TextField onChange={(e)=>{onInputChange(e)}} name='lastname' label='Enter LastName' />
+                            <TextField onChange={(e)=>{onInputChange(e)}} name = 'username' label='Enter Username' />
+                            <TextField onChange={(e)=>{onInputChange(e)}} name='email' label='Enter Email' />
+                            <TextField onChange={(e)=>{onInputChange(e)}} name = 'password' label='Enter Password' />
+                            <TextField onChange={(e)=>{onInputChange(e)}} name='phone' label='Enter Phone' />
+                            <Button variant='contained' onClick={() => signupuser() } className={classes.loginBtn}>SignUp</Button>
+                        </Box>
                     }
                 </Box>
             </DialogContent>
