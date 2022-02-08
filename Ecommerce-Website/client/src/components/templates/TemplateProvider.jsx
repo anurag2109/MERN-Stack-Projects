@@ -20,6 +20,11 @@ const TemplateProvider = ({children}) => {
                         paddingTop: 0
                     }
                 }
+            },
+            MuiTableCell:{
+                root:{
+                    borderBottom: 'none'
+                }
             }
         }
     })

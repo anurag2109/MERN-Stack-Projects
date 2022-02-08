@@ -1,8 +1,7 @@
 import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-import {products} from '../../constants/data.js';
+import { Link } from 'react-router-dom';
 import { Box, Divider, Typography, makeStyles, Button } from '@material-ui/core';
 import Countdown from 'react-countdown';
 
@@ -54,7 +53,7 @@ const useStyle = makeStyles({
 });
 
 
-const Slides = ({title, timer}) => {
+const Slides = ({title, timer, products}) => {
   const classes = useStyle();
 
 
@@ -93,13 +92,15 @@ const Slides = ({title, timer}) => {
                 itemClass="carousel-item-padding-40-px"
             >
                 {
-                    products.map((item)=>(
+                    products.map(item =>(
+                      <Link to={`product/${item.id}`} style={{textDecoration: 'none'}}>
                         <Box className={classes.sliderImgAndTextBox}>
                             <img src={item.url} alt={item.title} className={classes.sliderImage} />    
                             <Typography className={classes.text}>{item.title.shortTitle}</Typography>
                             <Typography className={classes.text}>{item.discount}</Typography>
                             <Typography className={classes.text}>{item.tagline}</Typography>
                         </Box>
+                      </Link>
                     ))
                 }
         </Carousel>
