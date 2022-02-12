@@ -1,11 +1,14 @@
 import Messanger from "./components/Messanger";
 import AccountProvider from "./context/AccountProvider";
+import TemplateProvider from "./theme/TemplateProvider";
 
 function App() {
   return (
-    <AccountProvider>
-      <Messanger/>
-    </AccountProvider>
+    <TemplateProvider>
+      <AccountProvider>
+        <Messanger/>
+      </AccountProvider>
+    </TemplateProvider>
   );
 }
 

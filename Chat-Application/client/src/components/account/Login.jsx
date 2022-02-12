@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Box, Typography, Dialog, withStyles, makeStyles, List, ListItem } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 import { AccountContext } from '../../context/AccountProvider';
+import { clientId } from '../../constants/data.js';
 
 
 const useStyle = makeStyles({
@@ -43,7 +44,8 @@ const style = {
         marginTop: '12%',
         boxShadow: 'none',
         maxHeight: '100%',
-        maxWidth: '100%'
+        maxWidth: '100%',
+        overFlow: 'hidden'
     }
 }
 
@@ -52,7 +54,7 @@ const Login = ({ classes }) => {
     const classname = useStyle();
     
     const qrurl = 'https://www.ginifab.com/feeds/qr_code/img/qrcode.jpg';
-    const clientId = '890081687998-66eh51isu6lrqjj5ad71ucrj53ochpbi.apps.googleusercontent.com'
+   
     const { account, setAccount } = useContext(AccountContext);
 
 
@@ -78,16 +80,18 @@ const Login = ({ classes }) => {
                         <ListItem>3. Point your phone to this screen to capture the code</ListItem>
                     </List>
                 </Box>
-                <Box>
+                <Box style={{position: 'relative'}}>
                     <img src={qrurl} alt="QR code" className={classname.qrcode} />    
-                    <GoogleLogin
-                        clientId={clientId}
-                        buttonText=''
-                        isSignedIn={true}
-                        onSuccess={onLoginSuccess}
-                        onFailure={onLoginFailure}
-                        cookiePolicy={'single_host_origin'}
-                    />
+                    <Box style={{position: 'absolute', left: '50%', top: '50%'}}>
+                        <GoogleLogin
+                            clientId={clientId}
+                            buttonText=""
+                            onSuccess={onLoginSuccess}
+                            onFailure={onLoginFailure}
+                            cookiePolicy={'single_host_origin'}
+                            isSignedIn={true}
+                        />
+                    </Box>
                 </Box>  
             </Box>
         </Dialog>

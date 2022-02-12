@@ -1,33 +1,42 @@
 import React from 'react';
 import { Box, AppBar, Toolbar, makeStyles } from '@material-ui/core';
-import { AccountContext } from '../context/AccountProvider';
+import { AccountContext } from '../context/AccountProvider.jsx';
+import { useContext } from 'react';
 
 // component
 import Login from './account/Login';
-import { useContext } from 'react';
 import ChatBox from './ChatBox';
 
 const useStyle = makeStyles({
     appbar: {
         height: 200,
-        background: '#00bfb5',
+        background: '#00bfa5',
         boxShadow: 'none'
     },
     component:{
         background: '#DCDCDC',
         height: '100vh'
-    }
+    },
+    chatAppbar: {
+        height: 115,
+        background: '#128c7e',
+        boxShadow: 'none'
+    },
 })
 const Messanger = () => {
     const classes = useStyle();
-    const { account } = useContext(AccountContext);
+    const { account, setAccount } = useContext(AccountContext);
 
     return(
         <Box className={classes.component}>
-            <AppBar className={classes.appbar}>
+            <AppBar className={ account ? classes.chatAppbar : classes.appbar }>
                 <Toolbar></Toolbar>
             </AppBar>
-            { account ? <ChatBox/> : <Login/> }
+            
+            {
+                account ? <ChatBox/> : <Login/> 
+            }
+            
         </Box>
     );
 };
