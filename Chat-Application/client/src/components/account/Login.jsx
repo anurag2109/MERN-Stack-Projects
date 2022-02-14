@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import { AccountContext } from '../../context/AccountProvider';
 import { clientId } from '../../constants/data.js';
 
+import { addUser } from '../../service/api';
 
 const useStyle = makeStyles({
     component:{
@@ -58,9 +59,10 @@ const Login = ({ classes }) => {
     const { account, setAccount } = useContext(AccountContext);
 
 
-    const onLoginSuccess = (res) =>{
+    const onLoginSuccess = async (res) =>{
         console.log("Login successful", res.profileObj)
         setAccount(res.profileObj);
+        await addUser(res.profileObj);
     }
     const onLoginFailure = () =>{
         console.log("Login failure")
