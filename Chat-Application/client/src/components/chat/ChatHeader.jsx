@@ -10,7 +10,8 @@ const useStyle = makeStyles({
         height: 35,
         background: '#ededed',
         padding: '10px 16px',
-        alignItems: 'center'
+        alignItems: 'center',
+        // width: '100%'
     },
     dp:{
         width: 37,
