@@ -30,7 +30,7 @@ const Chat = () => {
     return (
       <Box>
         <ChatHeader/>
-        <Messages conversation={conversation}/>
+        <Messages person={person} conversation={conversation}/>
       </Box>
     )
 }
