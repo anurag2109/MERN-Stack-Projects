@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import DetailView from './components/product/DetailView';
-import TemplateProvider from './components/templates/TemplateProvider.js';
-import ContextProvider from './context/ContextProvider.js';
+import TemplateProvider from './components/templates/TemplateProvider';
+import ContextProvider from './context/ContextProvider';
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
           <Header/>
           <Routes>
             <Route exact path="/" element={<Home/>} />
-            {/* <Route exact path="/cart" element={<Home/>} /> */}
             <Route exact path='/product/:id' element={<DetailView/>} />
           </Routes>
         </BrowserRouter>

@@ -92,13 +92,13 @@ const Slides = ({title, timer, products}) => {
                 itemClass="carousel-item-padding-40-px"
             >
                 {
-                    products.map(product =>(
-                      <Link to={`product/${product.id}`} style={{textDecoration: 'none'}}>
+                    products.map(item =>(
+                      <Link to={`product/${item.id}`} style={{textDecoration: 'none'}}>
                         <Box className={classes.sliderImgAndTextBox}>
-                            <img src={product.url} alt={product.title} className={classes.sliderImage} />    
-                            <Typography className={classes.text}>{product.title.shortTitle}</Typography>
-                            <Typography className={classes.text}>{product.discount}</Typography>
-                            <Typography className={classes.text}>{product.tagline}</Typography>
+                            <img src={item.url} alt={item.title} className={classes.sliderImage} />    
+                            <Typography className={classes.text}>{item.title.shortTitle}</Typography>
+                            <Typography className={classes.text}>{item.discount}</Typography>
+                            <Typography className={classes.text}>{item.tagline}</Typography>
                         </Box>
                       </Link>
                     ))
