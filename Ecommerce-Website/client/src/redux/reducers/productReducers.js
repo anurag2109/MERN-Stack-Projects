@@ -12,7 +12,7 @@ export const getProductsReducers = (state = { products: []}, action) =>{
     }
 }
 
-export const getProductDetailsReducer = (state = { product: {} }, action) =>{
+export const getProductDetailsReducer = (state = { product : {} }, action) =>{
     switch (action.type) {
         case actionType.GET_PRODUCT_DETAIL_SUCCESS:
             return { product: action.payload} 

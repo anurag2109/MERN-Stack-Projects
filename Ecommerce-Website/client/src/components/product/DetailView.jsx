@@ -1,12 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetails } from '../../redux/actions/productAction';
+import { getProductDetails } from '../../redux/actions/productAction.js';
 import { Box, makeStyles, Table, TableBody, TableCell, TableRow, Typography } from '@material-ui/core';
 import { LocalOffer as Badge } from '@material-ui/icons';
 import ActionItem from './ActionItem';
 import clsx from 'clsx';
-
+import { useParams } from "react-router-dom";
 
 const useStyle = makeStyles({
   component:{
@@ -47,14 +47,18 @@ const useStyle = makeStyles({
   }
 })
 
-const DetailView = ({ match }) => {
+const DetailView = () => {
   const classes = useStyle();
 
   const { product } = useSelector(state => state.getProductDetails);
   const dispatch = useDispatch();
+  console.log(product)
+
+  // new technique to extract id from url. old one was "match.params.id"
+  const { id } = useParams();   
   
   useEffect(()=>{
-    dispatch(getProductDetails(match.params.id));
+    dispatch(getProductDetails(id));
   }, [dispatch]);
   
   const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png';
@@ -136,6 +140,7 @@ const DetailView = ({ match }) => {
       </Box>
       }
     </Box>
+    // <p>Hello</p>
   )
 };
 

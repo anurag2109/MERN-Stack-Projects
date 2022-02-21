@@ -4,7 +4,6 @@ import { getConversation, setConversation } from "../../service/api.js";
 
 import { AccountContext } from "../../context/AccountProvider";
 import { UserContext } from "../../context/userProvider";
-// import message from '../../../../server/model/msg.js';
 
 const useStyle = makeStyles({
   dp: {
