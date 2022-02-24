@@ -6,6 +6,7 @@ import { Box, makeStyles, Table, TableBody, TableCell, TableRow, Typography } fr
 import { LocalOffer as Badge } from '@material-ui/icons';
 import ActionItem from './ActionItem';
 import clsx from 'clsx';
+import { useParams } from 'react-router-dom';
 
 
 const useStyle = makeStyles({
@@ -16,8 +17,8 @@ const useStyle = makeStyles({
   container:{
     display: 'flex',
 
-    margin: '0 80px',
-    background: 'white'
+    // margin: '0 80px',
+    background: '#fff'
   },
   rightContainer:{
     marginTop: 50,
@@ -52,9 +53,10 @@ const DetailView = ({ match }) => {
 
   const { product } = useSelector(state => state.getProductDetails);
   const dispatch = useDispatch();
+  const { id }= useParams()
   
   useEffect(()=>{
-    dispatch(getProductDetails(match.params.id));
+    dispatch(getProductDetails(id));
   }, [dispatch]);
   
   const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png';
